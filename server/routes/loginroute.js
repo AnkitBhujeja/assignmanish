@@ -10,13 +10,9 @@ const {
     loginEmp
 } = require("../controllers/emp");
 
-router.get("/", getAllEmp);
+// router.get("/", getAllEmp);
 
-router.post("/", postCreateEmp);
-router.post("/login", loginEmp);
-
-router.put("/:id", putUpdateEmp);
-
-router.delete("/:id", deleteEmp);
+// router.post("/", postCreateEmp);
+router.post("/", loginEmp);
 
 module.exports = router;

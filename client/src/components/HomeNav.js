@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useStore } from '../store';
 const HomeNav = () => {
+  const currentName = useStore((state) => state.currentName);
   return (
     <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -171,7 +172,7 @@ const HomeNav = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                User
+                {currentName}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>

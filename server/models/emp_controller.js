@@ -21,6 +21,13 @@ const create = async (user) =>{
     await session.run(`CREATE (u:User {_id : '${unique_id}', name: '${user.name}',mobile:'${user.mobile}', email: '${user.email}',gstin: '${user.gstin}',bank_account: '${user.bank_account}',bank_ifsc: '${user.ifsc}',password: '${user.password}',confirmpassword:'${user.confirmpassword}'} ) return u`)
     return await findById(unique_id)
 }
+const login= async (user) =>{
+    console.log(uuid.v1);
+    const unique_id = uuid.v1();
+    const result = await  session.run(`MATCH (u:User {email:'${user.email}',password:'${user.password}'})  Return u`)
+    console.log("result",result)
+    return result.records[0].get('u').properties
+}
 const findByIdAndUpdate = async (id, user) =>{
     const result = await session.run(`MATCH (u:User {_id : '${id}'}) SET u.title= '${user.title}', u.description= '${user.description}' return u`)
     return result.records[0].get('u').properties
@@ -34,6 +41,7 @@ module.exports ={
     findAll,
     findById,
     create,
+    login,
     findByIdAndUpdate,
     findByIdAndDelete
 }

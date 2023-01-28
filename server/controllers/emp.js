@@ -27,7 +27,20 @@ exports.postCreateEmp = (req, res) => {
             })
         );
 };
-
+exports.loginEmp = (req, res) => {
+    console.log("ghjkhhdhdh",req.body);
+    Emp.login(req.body)
+        .then((data) => {
+            console.log({ data });
+            res.json({ message: "login successfully", data });
+        })
+        .catch((err) =>
+            res.status(400).json({
+                message: "unable to login",
+                error: err.message,
+            })
+        );
+};
 exports.putUpdateEmp = (req, res) => {
     console.log("id: ", req.params.id);
     console.log("body: ", req.body);

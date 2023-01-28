@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useNavigate} from "react-router-dom";
 import "./register.css";
+import { useToaster,Message} from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 import axios from "axios";
+
+import { Router } from "react-router-dom";
 const Register = () => {
+  const toaster = useToaster();
   const [d1, setd1] = useState("");
   const [d2, setd2] = useState("d-none");
   const [data, setData] = useState({
@@ -14,28 +20,41 @@ const Register = () => {
     password: "",
     confirmpassword: "",
   });
-
+  let navigate = useNavigate();
   const onchange = (e) => {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
     // console.log(data);
   };
+
+
   const handleClick = (e) => {
     e.preventDefault();
     if (data.password != data.confirmpassword) {
       alert("password not match");
     } else {
       console.log("data ", data);
-      axios.post("http://localhost:8000/api/employee", data)
+      axios.post("http://localhost:8000/api/vendor", data)
         .then((res) => {
           setData({ mobile: "", email: "", gstin: "",
           bank_account: "",
           bank_ifsc: "",
           password: "",
           confirmpassword: ""});
+          toaster.push(
+            <Message type="success" closable>
+              Vendor Registration successfully
+            </Message>
+          );
+          navigate("/login")
           console.log(res.data.message, " mess printed ");
         })
         .catch((err) => {
           console.log("Error couldn't create Emp");
+          toaster.push(
+            <Message type="error" closable>
+              Error Couldn't create vendor
+            </Message>
+          );
           console.log(err.message);
         });
     }

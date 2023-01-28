@@ -6,18 +6,29 @@ import Home from './components/Home';
 import HomeNav from './components/HomeNav';
 import Login from './components/Login';
 import Register from './components/Register';
-
+import { BrowserRouter as Router,  Route ,Routes} from "react-router-dom";
 
 function App() {
   return (
     <div >
-      <Header/>
+      <Router>
+        <Routes>
+        
       {/* <HomeNav/> */}
-      <Register/>
+      <Route exact path="/register"  element={<><Header/><Register /></>}>
+      
+      </Route>
       {/* <Register2/> */}
-      {/* <Home/> */}
+      <Route exact path="/home"  element={<><HomeNav/><AddListing/></>}>
+      
+      </Route>
       {/* <AddListing/> */}
-      {/* <Login/> */}
+      <Route exact path = "/login"  element={<><Header/><Login /></>}>
+      
+      </Route>
+        </Routes>
+      </Router>
+      
     </div>
   );
 }

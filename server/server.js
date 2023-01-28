@@ -8,6 +8,7 @@ const app = express();
 connectDB();
 // routes
 const emproute = require('./routes/emproute');
+const loginroute = require('./routes/loginroute');
 // connect database
 
 
@@ -19,7 +20,10 @@ app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send('server is active'));
 
 // use routes
-app.use("/api/employee", emproute);
+app.use("/api/vendor", emproute);
+
+// app.use("/api/login", loginroute);
+// app.use("/api/vendor/login", emproute);
 
 // setting up port
 
